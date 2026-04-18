@@ -20,6 +20,16 @@ This study focuses on the Seattle watershed in Washington State, where reliable 
 
 This project focuses on the Cascade Mountain Range in the Pacific Northwest (Washington State and part of British Columbia), a region known for persistent winter cloud cover and complex terrain that makes snow mapping particularly challenging. The study area is limited to a manageable number of sub-regions in order to keep computation realistic while still capturing a range of elevation zones, vegetation conditions, and snow climates. The primary remote sensing dataset Landsat surface reflectance imagery, because it provides high spatial resolution (30 m) and includes spectral bands that are highly sensitive to snow and cloud reflectance. This dataset is available for past few decades, but we have mainly focused on years following 2020 (Table 1).
 
+| Image ID 	| Acquisition Date |	Centered on |	Season|	Cloud Cover	| Spatial Resolution|	ML Purpose
+|---------|---------|---------|---------|---------|---------|---------|
+|LE07_L2SP_045027_20201128_02_T1 |	28 Nov 2020	| Yakima	| Winter 2020 |	20%	| 30m	| Train|
+|LC09_L2SP_046026_20220109_02_T1 |	09 Jan 2022	| Vancouver	| Winter 2021	| 20.46%	| 30m	| Train|
+|LC08_L2SP_046026_20221203_02_T1 |03 Dec 2022	| Vancouver	| Winter 2022	| 21.53%	| 30m	| Train|
+|LC08_L2SP_046026_20240107_02_T1 |	07 Jan 2024	| Vancouver	| Winter 2023	| 37.44%	| 30m	| Train|
+|LC08_L2SP_046026_20250314_02_T1 |	14 Mar 2025	| Vancouver	| Winter 2024	| 25.86%	| 30m	| Validate|
+|LC09_L2SP_047027_20260212_02_T1 |12 Feb 2026	| Seattle	| Winter 2025	| 28.91%	| 30m |	Test|
+                                                                                                                                   | 
+
 Five spectral bands are used in this project- Blue, Green, Red, Near InfraRed (NIR), and Short-Wave Infrared (SWIR). Spectral indices such as the Normalized Difference Snow Index (NDSI) and Normalized Difference Vegetation Index (NDVI) are calculated from Landsat bands and used both as predictive features and as a baseline snow-mapping method for comparison. 
 
 The project frames snow mapping as a three-class classification problem consisting of snow, cloud and other. The “other” class consists of land cover such as trees, water, bareground, agricultural land, and built-up areas. Rather than attempting to infer snow under clouds using purely optical data, cloud cover is treated explicitly as its own class to create a more honest and operationally realistic product. 
