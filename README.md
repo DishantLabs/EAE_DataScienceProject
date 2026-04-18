@@ -20,6 +20,8 @@ This study focuses on the Seattle watershed in Washington State, where reliable 
 
 This project focuses on the Cascade Mountain Range in the Pacific Northwest (Washington State and part of British Columbia), a region known for persistent winter cloud cover and complex terrain that makes snow mapping particularly challenging. The study area is limited to a manageable number of sub-regions in order to keep computation realistic while still capturing a range of elevation zones, vegetation conditions, and snow climates. The primary remote sensing dataset Landsat surface reflectance imagery, because it provides high spatial resolution (30 m) and includes spectral bands that are highly sensitive to snow and cloud reflectance. This dataset is available for past few decades, but we have mainly focused on years following 2020 (Table 1).
 
+Table 1: Satellite imagery used in this project
+
 | Image ID 	| Acquisition Date |	Centered on |	Season|	Cloud Cover	| Spatial Resolution|	ML Purpose
 |---------|---------|---------|---------|---------|---------|---------|
 |LE07_L2SP_045027_20201128_02_T1 |	28 Nov 2020	| Yakima	| Winter 2020 |	20%	| 30m	| Train|
