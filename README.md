@@ -30,7 +30,7 @@ Table 1: Satellite imagery used in this project
 |LC08_L2SP_046026_20240107_02_T1 |	07 Jan 2024	| Vancouver	| Winter 2023	| 37.44%	| 30m	| Train|
 |LC08_L2SP_046026_20250314_02_T1 |	14 Mar 2025	| Vancouver	| Winter 2024	| 25.86%	| 30m	| Validate|
 |LC09_L2SP_047027_20260212_02_T1 |12 Feb 2026	| Seattle	| Winter 2025	| 28.91%	| 30m |	Test|
-                                                                                                                                   | 
+ 
 
 Five spectral bands are used in this project- Blue, Green, Red, Near InfraRed (NIR), and Short-Wave Infrared (SWIR). Spectral indices such as the Normalized Difference Snow Index (NDSI) and Normalized Difference Vegetation Index (NDVI) are calculated from Landsat bands and used both as predictive features and as a baseline snow-mapping method for comparison. 
 
