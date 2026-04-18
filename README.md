@@ -26,6 +26,10 @@ The project frames snow mapping as a three-class classification problem consisti
 
 To create training, validation, and testing labels, all five spectral bands were first loaded into ArcGIS Pro and projected to WGS 1984 UTM Zone 10N. Using the Composite Bands tool in the geoprocessing toolbox, the bands were stacked into a single multiband raster for each year, creating a permanent dataset suitable for modeling (while temporary composites for digitization can alternatively be generated through Imagery → Raster Functions → Data Management → Composite Bands). For each year, a polygon feature class was created with a class label field, and training polygons were digitized for each land cover class. Stratified random sampling was then performed using the “Create Spatial Sampling Locations” tool, ensuring equal representation across classes with 4,000 samples per class and a minimum spacing of 30 meters between points. A class label field was populated using conditional logic (“Cloud” if CID = 1, “Other” if CID = 2, and “Snow” if CID = 3). Finally, the Sample tool from Image Analyst was used to extract spectral values at the sampled locations, producing a table for subsequent analysis and modeling. Model Builder in ArcGIS Pro is used to develop a model to automate sampling process (fig.1). More than 70,000 pixel data points are extracted into csv files where each row represents a single pixel value and columns represent latitude, longitude, band values and indices.
 
+![ArcGIS Model](model.PNG)
+> Figure 1. Model created in ArcGIS Pro which takes 5 raster images and a polygon file for three classes, and outputs a labelled class table.
+
+
 The csv files thus generated are further processed using Pandas Python library in Google Colab environment, which involved data cleaning where null values are removed. To avoid overly optimistic results caused by spatial autocorrelation, the dataset is split using a spatial holdout approach, where training and testing are conducted on separate geographic regions rather than randomly mixing pixels from the same scene. To further avoid data leakage, scenes from different years will be used for training and testing. This ensures that the models are evaluated on their ability to generalize to new areas of the Cascades, which is critical for real-world applicability. To achieve this purpose, four images from 2020 to 2023 are used to create the training set, while the 2024 image is used for validation and 2025 image is used for testing the machine learning model. It is done to ensure there is no temporal data leakage into the model. In addition, model is trained, validated and tested on different Landsat scenes centered on Vancouver, Yakima, and Seattle to minimize data leakage through spatial autocorrelation and improving model’s generalizability to different spatial regions. 
 
 Using Scikit-Learn library, data is standardized and made suitable for ML modelling, A Random Forest classifier is trained using pixel-based feature vectors that include spectral reflectance bands, snow and vegetation indices, and coordinates. Random Forest serves as a strong baseline because it performs well on structured tabular data and is relatively robust to noise. Second, an XGBoost model will be trained using the same feature set. XGBoost is expected to improve performance through gradient boosting and is commonly used in industry due to its high accuracy and efficient handling of nonlinear relationships. Model performance is evaluated using metrics appropriate for segmentation and multi-class classification, including overall accuracy, precision, recall, and F1-score. 
@@ -48,20 +52,49 @@ The overall high classification accuracy observed in this study is consistent wi
 Despite these strong results, the near-perfect validation accuracy should be interpreted with caution. Previous studies have shown that spatial autocorrelation and similarities between training and validation datasets can lead to inflated performance estimates. Karasiak et al. (2022) demonstrate that improper spatial separation can artificially increase classification accuracy in remote sensing applications, while Ploton et al. (2020) show that models evaluated without strict spatial independence often perform poorly when applied to new regions.
 Overall, the results indicate that the Random Forest model is highly effective for distinguishing snow, cloud, and background land cover in the Cascade Range. The combination of spectral bands and derived indices provides strong predictive capability, and model performance is consistent with findings from previous machine learning-based snow mapping studies. However, final conclusions regarding model robustness will depend on evaluation using a fully independent test dataset.
 
-
-![ArcGIS Model](model.PNG)
-> Figure 1. Model created in ArcGIS Pro which takes 5 raster images and a polygon file for three classes, and outputs a labelled class table.
-
 In addition to the yearly and diurnal distributions, we examine the distributions of additional features associated with EMLs in the dataset (Fig. 3). Consistent with the literature, EMLs are most frequent in the southern half of the Great Plains in spring, roughly south of 40° N latitude. Vertical profiles associated with EMLs have steep lapse rates, relatively low relative humidity, and sufficient vertical wind shear to support deep, moist convection. Due to the presence of the EML’s capping inversion, many EMLs also have moderate to large MUCIN and fairly high 700 mb temperatures. 
 
-etc. etc.
 
 ## IV. Summary
 
-This study examines the feasibility of using a random forest classifier to identify the EML in the central CONUS. EMLs are identified in ten years of 6-hourly May data from the ERA5 and converted into binary output. Select variables from ERA5 are used as feature input for the machine learning model. Feature importance is determined during the model development phase. Summary statistics of the final model output are assessed for the testing dataset. Class balance issues with a proportionally smaller number of EMLs compared to non-EMLs in the training and validation data are a limiting factor in model development; however, we anticipate a general assessment of the feasibility of using a random forest classifier in the identification of EMLs in ERA5. By demonstrating the diagnostic capabilities of the machine learning model, we provide a critical tool for severe weather forecasting in the central CONUS.
+This project explores the utility of supervised Machine Learning techniques to improve snow cover classification in the mountain regions which receive high winter precipitation and cloud cover remains high. Traditional remote sensing supervised classification algorithms such maximum likelihood often confuses cloud cover with snow cover leading to overestimation of the latter. We have chosen Pacific-Northwest as the study area based on its climatic regime. We have created an API from automatic satellite data acquisition from Microsoft Planetary Computers, which only requires location coordinates, time period, and cloud cover percentage from user’s end. Six satellite images from Landsat-7, 9 and 9 sensors acquired between 2020 and 2025 are used in this project to create training, validation, and testing datasets for this project. Geoprocessing tools in ArcGIS Pro are used for creating the labelled dataset. Further processing and modelling are done using Python libraries in Google Colab environment. Pandas is used read csv files and to remove null values. Additional features (NDSI and NDVI) are also created from existing features using Pandas. Scikit-Learn is used to standardize the datasets. Random Forest model is trained on 2020-2023 data, validated on 2024 data, and tested on 2025 data using the best performing hyperparameters. Overall, the Random Forest model achieved near-perfect classification accuracy, demonstrating that combining spectral bands with derived indices such as NDSI is highly effective for distinguishing snow, cloud, and background land cover in the Cascade Range. The strong performance across all metrics indicates that the model is robust and capable of generalizing unseen validation data well. 
+
+Next step is to run a XGBoost model which will not take much effort because the data is already prepared.
+
+In future, deep learning models, specifically Convolutions Neural Networks (U-Nets) could be trained to improve the classification. Including additional features such as, elevation, slope, aspect, thermal bands can possibly improve the model performance. Training the model on similar mountain regions from Southern Hemisphere, such as, Patagonian Andes, can possibly introduce more variation that ML and DL models can learn from. 
+
 
 ## V. References
 
-Agard, V., and K. Emanuel, 2017: Clausius–Clapeyron Scaling of Peak CAPE in Continental Convective Storm Environments. *Journal of the Atmospheric Sciences*, **74**, 3043–3054, https://doi.org/10.1175/JAS-D-16-0352.1.
+Belgiu, M., and L. Drăguţ, 2016: Random forest in remote sensing: A review of applications and future directions. ISPRS J. Photogramm. Remote Sens., 114, 24–31.
 
-Andrews, M. S., V. A. Gensini, A. M. Haberlie, W. S. Ashley, A. C. Michaelis, and M. Taszarek, 2024: Climatology of the Elevated Mixed Layer over the Contiguous United States and Northern Mexico Using ERA5: 1979–2021. *Journal of Climate*, **37**, 1833-1851,  https://doi.org/10.1175/JCLI-D-23-0517.1.
+Cascade Backcountry Alliance, 2023: Washington weather: Introduction and resources. [Available online at https://www.cascadebackcountryalliance.com/post/washington-weather-introduction-and-resources.]
+
+City of Seattle, 2024: Seattle Public Utilities. [Available online at https://www.seattle.gov/utilities.]
+
+Dietz, A. J., and Coauthors, 2012: Remote sensing of snow—A review of available methods. Int. J. Remote Sens., 33, 4094–4134.
+
+Dong, C., and Coauthors, 2022: Mapping snow cover in forests using optical remote sensing, machine learning, and time-lapse photography. Remote Sens. Environ.
+
+Hall, D. K., and Coauthors, 2002: MODIS snow-cover products. Remote Sens. Environ., 83, 181–194.
+
+Jin, D., and Coauthors, 2022: An improvement of snow/cloud discrimination from machine learning using geostationary satellite data. Big Earth Data, 6, 739–755.
+
+Karasiak, N., and Coauthors, 2022: Spatial dependence between training and test sets: Another pitfall of classification accuracy assessment in remote sensing. Mach. Learn., 111, 2715–2740.
+
+Liu, C., and Coauthors, 2020: MODIS fractional snow cover mapping using machine learning technology in a mountainous area. Remote Sens., 12, 962.
+
+Luo, J., and Coauthors, 2022: Mapping snow cover in forests using optical remote sensing, machine learning, and time-lapse photography. Remote Sens. Environ., 276.
+
+Ma, L., and Coauthors, 2019: Deep learning in remote sensing applications: A meta-analysis and review. ISPRS J. Photogramm. Remote Sens., 152, 166–177.
+Maxwell, A. E., and Coauthors, 2018: Random forest classification in remote sensing: A review of applications and future directions. Remote Sens., 10, 463.
+
+Millard, K., and M. Richardson, 2015: On the importance of training data sample selection in random forest image classification. Remote Sens., 7, 8489–8515.
+
+Ploton, P., and Coauthors, 2020: Spatial validation reveals poor predictive performance of large-scale ecological mapping models. Nat. Commun., 11, 4546.
+
+Richiardi, C., and Coauthors, 2023: Snow cover mapping using random forest classification in alpine regions. Remote Sens., 15, 343.
+
+Stillinger, T., and Coauthors, 2019: Cloud masking for Landsat 8 and MODIS Terra over snow-covered terrain: Error analysis and implications for snow mapping. Water Resour. Res., 55, 10607–10623.
+
+Zhu, X. X., and Coauthors, 2017: Deep learning in remote sensing: A comprehensive review and list of resources. IEEE Geosci. Remote Sens. Mag., 5, 8–36.
