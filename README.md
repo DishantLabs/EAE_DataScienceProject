@@ -50,7 +50,7 @@ Overall, the results indicate that the Random Forest model is highly effective f
 
 
 ![ArcGIS Model](model.PNG)
-> Figure 2. The number of no EML vs. EML instances in the full dataset (left). The distribution of May EMLs per year (center) and per hour (right). 
+> Figure 1. Model created in ArcGIS Pro which takes 5 raster images and a polygon file for three classes, and outputs a labelled class table.
 
 In addition to the yearly and diurnal distributions, we examine the distributions of additional features associated with EMLs in the dataset (Fig. 3). Consistent with the literature, EMLs are most frequent in the southern half of the Great Plains in spring, roughly south of 40° N latitude. Vertical profiles associated with EMLs have steep lapse rates, relatively low relative humidity, and sufficient vertical wind shear to support deep, moist convection. Due to the presence of the EML’s capping inversion, many EMLs also have moderate to large MUCIN and fairly high 700 mb temperatures. 
 
