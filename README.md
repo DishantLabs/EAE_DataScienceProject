@@ -72,6 +72,8 @@ The most significant technical risk is data volume: because the study area is li
 
 ## V. Timeline
 
+Table 3: Major Milestones and Timeline 
+
 | Task 	| Time Estimate |	Confidence | Notes 
 |---------|---------|---------|---------|
 |Gather Landsat satellite data |	1 week	| Great	(4/4)| Our group has worked with Landsat data and know where to get it and how to use it|
@@ -107,14 +109,14 @@ Overall, the results indicate that the Random Forest model is highly effective f
 > Figure 5. Feature Importance
 
 
-## IV. Summary
+## VII. Summary
 
 This project explores the utility of supervised Machine Learning techniques to improve snow cover classification in the mountain regions which receive high winter precipitation and cloud cover remains high. Traditional remote sensing supervised classification algorithms such maximum likelihood often confuses cloud cover with snow cover leading to overestimation of the latter. We have chosen Pacific-Northwest as the study area based on its climatic regime. We have created an API from automatic satellite data acquisition from Microsoft Planetary Computers, which only requires location coordinates, time period, and cloud cover percentage from user’s end. Six satellite images from Landsat-7, 9 and 9 sensors acquired between 2020 and 2025 are used in this project to create training, validation, and testing datasets for this project. Geoprocessing tools in ArcGIS Pro are used for creating the labelled dataset. Further processing and modelling are done using Python libraries in Google Colab environment. Pandas is used read csv files and to remove null values. Additional features (NDSI and NDVI) are also created from existing features using Pandas. Scikit-Learn is used to standardize the datasets. Random Forest model is trained on 2020-2023 data, validated on 2024 data, and tested on 2025 data using the best performing hyperparameters. Overall, the Random Forest model achieved near-perfect classification accuracy, demonstrating that combining spectral bands with derived indices such as NDSI is highly effective for distinguishing snow, cloud, and background land cover in the Cascade Range. The strong performance across all metrics indicates that the model is robust and capable of generalizing unseen validation data well. 
 
 In future, other Machine Learning Models such as XGBoost and CatBoost, and deep learning models, specifically Convolutions Neural Networks (U-Nets) could be trained to improve the classification. Including additional features such as, elevation, slope, aspect, thermal bands can possibly improve the model performance. Training the model on similar mountain regions from Southern Hemisphere, such as, Patagonian Andes, can possibly introduce more variation that ML and DL models can learn from. 
 
 
-## V. References
+## VIII. References
 
 Belgiu, M., and L. Drăguţ, 2016: Random forest in remote sensing: A review of applications and future directions. ISPRS J. Photogramm. Remote Sens., 114, 24–31.
 
@@ -148,3 +150,20 @@ Richiardi, C., and Coauthors, 2023: Snow cover mapping using random forest class
 Stillinger, T., and Coauthors, 2019: Cloud masking for Landsat 8 and MODIS Terra over snow-covered terrain: Error analysis and implications for snow mapping. Water Resour. Res., 55, 10607–10623.
 
 Zhu, X. X., and Coauthors, 2017: Deep learning in remote sensing: A comprehensive review and list of resources. IEEE Geosci. Remote Sens. Mag., 5, 8–36.
+
+## IX. Requirements 
+
+Table 4: Project Requirements identified in the beginning
+
+| Requirement 	| Priority |	Sprint | Assigned to | Description | Acceptance Criteria | Automatic Test 
+|---------|---------|---------|---------|---------|---------|---------|
+|Create API for automatic Satellite data ingestion |	High	| 1 | Dishant | As a developer of a machine learning model, I need to create an API for automatic satellite image download from the cloud so that there is no need to manually download data from a portal like USGS Earth Explorer and then upload it to Google Colab | API works for user provided study area coordinates and time range.	Dataset must be in a format (.TIF) that can be easily read and modified either via Python or through desktop GIS software such as QGIS or ArcGIS Pro | Create a script that tests if satellite image has all the required spectral bands, is from the correct year and is in the correct format. If these conditions are not met, return an error |
+
+|Rasterio |	Handle and manipulate raster images	| Good	(3/4)| 
+|NumPy |Mathematical operation	| Good	(3/4)| 
+|Pandas |	Handle and maipulate tables	| Good	(3/4)	| 
+|Scikit-Learn |	Data preprocessing and ML	| Good	(3/4)	| 
+|Cartopy |Create Maps	| Good	(3/4)| 
+|Matplotlib |Create Plots	| Good	(3/4)| 
+|Seaborn |Create Plots| Good	(3/4)| 
+
