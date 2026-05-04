@@ -64,8 +64,13 @@ Table 2: Python packages used in this project
 |Seaborn |Create Plots| Good	(3/4)| 
 
 
+## III. Feasibility and Ambition
+Prior work on snow/cloud classification using satellite imagery does exist, with studies applying methods like NDSI, Random Forest, XGBoost, and U-Net to Landsat data with DEM-derived variables. What distinguishes this project is its reframing of cloud cover from a nuisance to be masked out into an explicit classification target that an ML model can learn to distinguish alongside snow. Both team members bring prior experience with satellite imagery, GIS tools, and weather data, and while Python skills are still developing, the team has a solid conceptual grasp of the full workflow from data acquisition through model training. The computational plan is realistic, with CPU reserved for RF and XGBoost and GPU reserved for U-Net if needed, and the team expects that gaps in ML training experience will close as the course progresses.
 
-## III. Results
+## IV. Potential Issues
+The most significant technical risk is data volume: because the study area is limited to the Cascade mountain range rather than a broader continental domain, there may not be enough analogous Landsat imagery to effectively train a three-class classifier at the required spatial detail. Integrating SRTM/DEM-derived variables adds another layer of complexity, particularly in ensuring that slope, elevation, and aspect indices are correctly calibrated and aligned to the satellite grid. Beyond those data challenges, limited prior experience with training machine learning models is the team's most honest self-identified barrier, though the structured course environment should help close that gap over time.
+
+## V. Results
 
 After preprocessing and removal of null values, the dataset consisted of 47,783 training samples, 12,000 validation samples, and 11,999 test samples. Predictor variables included Landsat spectral bands (Blue, Green, Red, NIR, and SWIR), derived indices (NDVI and NDSI), and spatial coordinates (X, Y).
 
@@ -88,9 +93,7 @@ In addition to the yearly and diurnal distributions, we examine the distribution
 
 This project explores the utility of supervised Machine Learning techniques to improve snow cover classification in the mountain regions which receive high winter precipitation and cloud cover remains high. Traditional remote sensing supervised classification algorithms such maximum likelihood often confuses cloud cover with snow cover leading to overestimation of the latter. We have chosen Pacific-Northwest as the study area based on its climatic regime. We have created an API from automatic satellite data acquisition from Microsoft Planetary Computers, which only requires location coordinates, time period, and cloud cover percentage from user’s end. Six satellite images from Landsat-7, 9 and 9 sensors acquired between 2020 and 2025 are used in this project to create training, validation, and testing datasets for this project. Geoprocessing tools in ArcGIS Pro are used for creating the labelled dataset. Further processing and modelling are done using Python libraries in Google Colab environment. Pandas is used read csv files and to remove null values. Additional features (NDSI and NDVI) are also created from existing features using Pandas. Scikit-Learn is used to standardize the datasets. Random Forest model is trained on 2020-2023 data, validated on 2024 data, and tested on 2025 data using the best performing hyperparameters. Overall, the Random Forest model achieved near-perfect classification accuracy, demonstrating that combining spectral bands with derived indices such as NDSI is highly effective for distinguishing snow, cloud, and background land cover in the Cascade Range. The strong performance across all metrics indicates that the model is robust and capable of generalizing unseen validation data well. 
 
-Next step is to run a XGBoost model which will not take much effort because the data is already prepared.
-
-In future, deep learning models, specifically Convolutions Neural Networks (U-Nets) could be trained to improve the classification. Including additional features such as, elevation, slope, aspect, thermal bands can possibly improve the model performance. Training the model on similar mountain regions from Southern Hemisphere, such as, Patagonian Andes, can possibly introduce more variation that ML and DL models can learn from. 
+In future, other Machine Learning Models such as XGBoost anf CatBoost, and deep learning models, specifically Convolutions Neural Networks (U-Nets) could be trained to improve the classification. Including additional features such as, elevation, slope, aspect, thermal bands can possibly improve the model performance. Training the model on similar mountain regions from Southern Hemisphere, such as, Patagonian Andes, can possibly introduce more variation that ML and DL models can learn from. 
 
 
 ## V. References
