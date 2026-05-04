@@ -81,7 +81,7 @@ The most significant technical risk is data volume: because the study area is li
 |Write up the report |	2 weeks	| Good	(3/4)	| Both group members have written up scientific results before and discussed them in a course paper or research article|
 
 
-## V. Results
+## VI. Results
 
 After preprocessing and removal of null values, the dataset consisted of 47,783 training samples, 12,000 validation samples, and 11,999 test samples. Predictor variables included Landsat spectral bands (Blue, Green, Red, NIR, and SWIR), derived indices (NDVI and NDSI), and spatial coordinates (X, Y).
 
@@ -97,7 +97,12 @@ The overall high classification accuracy observed in this study is consistent wi
 Despite these strong results, the near-perfect validation accuracy should be interpreted with caution. Previous studies have shown that spatial autocorrelation and similarities between training and validation datasets can lead to inflated performance estimates. Karasiak et al. (2022) demonstrate that improper spatial separation can artificially increase classification accuracy in remote sensing applications, while Ploton et al. (2020) show that models evaluated without strict spatial independence often perform poorly when applied to new regions.
 Overall, the results indicate that the Random Forest model is highly effective for distinguishing snow, cloud, and background land cover in the Cascade Range. The combination of spectral bands and derived indices provides strong predictive capability, and model performance is consistent with findings from previous machine learning-based snow mapping studies. However, final conclusions regarding model robustness will depend on evaluation using a fully independent test dataset.
 
-In addition to the yearly and diurnal distributions, we examine the distributions of additional features associated with EMLs in the dataset (Fig. 3). Consistent with the literature, EMLs are most frequent in the southern half of the Great Plains in spring, roughly south of 40° N latitude. Vertical profiles associated with EMLs have steep lapse rates, relatively low relative humidity, and sufficient vertical wind shear to support deep, moist convection. Due to the presence of the EML’s capping inversion, many EMLs also have moderate to large MUCIN and fairly high 700 mb temperatures. 
+![Classification Report](images/CM.png)
+> Figure 3. Classification Report
+![Classification Matrix](CMatrix.png)
+> Figure 4. Classification Matrix
+![Feature Importance](images/FI.png)
+> Figure 5. Feature Importance
 
 
 ## IV. Summary
