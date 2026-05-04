@@ -50,8 +50,22 @@ The csv files thus generated are further processed using Pandas Python library i
 Using Scikit-Learn library, data is standardized and made suitable for ML modelling, A Random Forest classifier is trained using pixel-based feature vectors that include spectral reflectance bands, snow and vegetation indices, and coordinates. Random Forest serves as a strong baseline because it performs well on structured tabular data and is relatively robust to noise. Second, an XGBoost model will be trained using the same feature set. XGBoost is expected to improve performance through gradient boosting and is commonly used in industry due to its high accuracy and efficient handling of nonlinear relationships. Model performance is evaluated using metrics appropriate for segmentation and multi-class classification, including overall accuracy, precision, recall, and F1-score. 
 All preprocessing, modeling, and evaluation steps will be implemented in Python using standard geospatial and machine learning libraries. The final output will be designed as a reproducible workflow that produces snow/no-snow/cloud classification maps in georeferenced raster format, along with summary statistics such as snow-covered area by elevation band which could be exported as a csv file. 
 
+Table 2: Python packages used in this project
 
-## III. Initial Results
+| Package 	| Purpose |	Experience level |
+|---------|---------|---------|---------|
+|GeoAI Py |	Download satellite imagery	| Good	(3/4)| 
+|Rasterio |	Handle and maipulate raster images	| Good	(3/4)| 
+|NumPy |Mathematical operation	| Good	(3/4)| 
+|Pandas |	Handle and maipulate tables	| Good	(3/4)	| 
+|Scikit-Learn |	Data preprocessing and ML	| Good	(3/4)	| 
+|Cartopy |Create Maps	| Good	(3/4)| 
+|Matplotlib |Create Plots	| Good	(3/4)| 
+|Seaborn |Create Plots| Good	(3/4)| 
+
+
+
+## III. Results
 
 After preprocessing and removal of null values, the dataset consisted of 47,783 training samples, 12,000 validation samples, and 11,999 test samples. Predictor variables included Landsat spectral bands (Blue, Green, Red, NIR, and SWIR), derived indices (NDVI and NDSI), and spatial coordinates (X, Y).
 
