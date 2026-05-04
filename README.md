@@ -38,7 +38,7 @@ The project frames snow mapping as a three-class classification problem consisti
 
 To create training, validation, and testing labels, all five spectral bands were first loaded into ArcGIS Pro and projected to WGS 1984 UTM Zone 10N. Using the Composite Bands tool in the geoprocessing toolbox, the bands were stacked into a single multiband raster for each year, creating a permanent dataset suitable for modeling (while temporary composites for digitization can alternatively be generated through Imagery → Raster Functions → Data Management → Composite Bands). For each year, a polygon feature class was created with a class label field, and training polygons were digitized for each land cover class. Stratified random sampling was then performed using the “Create Spatial Sampling Locations” tool, ensuring equal representation across classes with 4,000 samples per class and a minimum spacing of 30 meters between points. A class label field was populated using conditional logic (“Cloud” if CID = 1, “Other” if CID = 2, and “Snow” if CID = 3). Finally, the Sample tool from Image Analyst was used to extract spectral values at the sampled locations, producing a table for subsequent analysis and modeling. Model Builder in ArcGIS Pro is used to develop a model to automate sampling process (fig.1). More than 70,000 pixel data points are extracted into csv files where each row represents a single pixel value and columns represent latitude, longitude, band values and indices.
 
-![ArcGIS Model](model.PNG)
+![ArcGIS Model](images/model.PNG)
 > Figure 1. Model created in ArcGIS Pro which takes 5 raster images and a polygon file for three classes, and outputs a labelled class table.
 
 
