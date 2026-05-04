@@ -53,7 +53,7 @@ All preprocessing, modeling, and evaluation steps will be implemented in Python 
 Table 2: Python packages used in this project
 
 | Package 	| Purpose |	Experience level 
-|---------|---------|---------|---------|
+|---------|---------|---------|
 |GeoAI Py |	Download satellite imagery	| Good	(3/4)| 
 |Rasterio |	Handle and maipulate raster images	| Good	(3/4)| 
 |NumPy |Mathematical operation	| Good	(3/4)| 
