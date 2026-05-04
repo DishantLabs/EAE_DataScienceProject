@@ -55,7 +55,7 @@ Table 2: Python packages used in this project
 | Package 	| Purpose |	Experience level 
 |---------|---------|---------|
 |GeoAI Py |	Download satellite imagery	| Good	(3/4)| 
-|Rasterio |	Handle and maipulate raster images	| Good	(3/4)| 
+|Rasterio |	Handle and manipulate raster images	| Good	(3/4)| 
 |NumPy |Mathematical operation	| Good	(3/4)| 
 |Pandas |	Handle and maipulate tables	| Good	(3/4)	| 
 |Scikit-Learn |	Data preprocessing and ML	| Good	(3/4)	| 
@@ -69,6 +69,17 @@ Prior work on snow/cloud classification using satellite imagery does exist, with
 
 ## IV. Potential Issues
 The most significant technical risk is data volume: because the study area is limited to the Cascade mountain range rather than a broader continental domain, there may not be enough analogous Landsat imagery to effectively train a three-class classifier at the required spatial detail. Integrating SRTM/DEM-derived variables adds another layer of complexity, particularly in ensuring that slope, elevation, and aspect indices are correctly calibrated and aligned to the satellite grid. Beyond those data challenges, limited prior experience with training machine learning models is the team's most honest self-identified barrier, though the structured course environment should help close that gap over time.
+
+## V. Timeline
+
+| Task 	| Time Estimate |	Confidence | Notes 
+|---------|---------|---------|---------|
+|Gather Landsat satellite data |	1 week	| Great	(4/4)| Our group has worked with Landsat data and know where to get it and how to use it|
+|Preprocess data (Stack satellite images, align the coordinate system and spatial resolution) |	2 weeks | Good	(3/4)| Our group has preprocessed satellite data before in ArcGIS Pro, but not in Python |
+|Create class labels for snow/no snow/cloud | 2 weeks	| Good	(3/4)| Our group has experience creating labels using GIS software |
+|Train and test the machine learning models|	3 weeks	| Fair	(2/4)	| Our group has trained a machine learning model before on tabular dataset. We need to figure out how to do it using image datasets |
+|Write up the report |	2 weeks	| Good	(3/4)	| Both group members have written up scientific results before and discussed them in a course paper or research article|
+
 
 ## V. Results
 
