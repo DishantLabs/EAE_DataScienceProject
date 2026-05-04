@@ -99,7 +99,7 @@ Overall, the results indicate that the Random Forest model is highly effective f
 
 ![Classification Report](images/CM.png)
 > Figure 3. Classification Report
-![Classification Matrix](CMatrix.png)
+![Classification Matrix](images/CMatrix.png)
 > Figure 4. Classification Matrix
 ![Feature Importance](images/FI.png)
 > Figure 5. Feature Importance
